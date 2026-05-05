@@ -1,0 +1,108 @@
+.carrito-main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 20px;
+}
+
+/* Contenedor de productos en el carrito */
+.item-carrito {
+    display: flex;
+    align-items: center;
+    background: white;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.item-info { flex: 1; padding: 0 20px; }
+
+/* Botones +, -, eliminar */
+.item-acciones { display: flex; gap: 8px; }
+
+.item-acciones button {
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-sumar { background: #4caf50; color: white; }
+.btn-restar { background: #ff9800; color: white; }
+.btn-eliminar-todo { background: #f44336; color: white; }
+
+.btn-secundario {
+    background: #d41515;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+/* Formulario */
+.form-checkout {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.campo { display: flex; flex-direction: column; gap: 5px; }
+
+.campo input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.btn-finalizar {
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* Contenedor del mensaje de vacío */
+.carrito-vacio {
+    text-align: center;
+    padding: 60px 20px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin: 20px auto;
+}
+
+.carrito-vacio p {
+    font-size: 1.4rem;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Botón para volver a la Home */
+.btn-volver {
+    display: inline-block;
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-volver:hover {
+    background-color: #b71c1c;
+    transform: scale(1.05);
+}

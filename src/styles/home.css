@@ -1,0 +1,129 @@
+#contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+article {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: left;
+    transition: transform 0.3s;
+}
+
+article:hover {
+    transform: translateY(-2px);
+}
+
+article img {
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 250px;
+    height: 200px;
+}
+
+article h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+article p {
+    font-size: 15px;
+    margin-bottom: 5px;;
+}
+
+.btn-agregar {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-agregar:hover { background-color: #b71c1c; }
+
+.btn-exito {
+    background-color: #27ae60 !important;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+/* categorías y buscador */
+.main-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Barra Lateral */
+.sidebar {
+    grid-column: auto / span 1;
+    width: 220px; /* Ancho fijo para las categorías */
+    background-color: #fff;
+    padding: 2rem 1.5rem;
+    border-right: 1px solid #eee;
+}
+
+.sidebar h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #000000;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+#lista-categorias {
+    list-style: none;
+}
+
+/* Estilo de los links de categorías */
+#lista-categorias li a {
+    display: block;
+    padding: 12px 15px;
+    color: #444444;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: 0.3s;
+    margin-bottom: 5px;
+}
+
+#lista-categorias li a:hover,
+#lista-categorias li a.active {
+    background-color: #cf2c2c; 
+    color: #fff;
+}
+
+/* Todo el contenido */
+.content {
+    flex: 1;
+    padding: 2rem;
+    background-color: #f9f9f9ce;
+}
+
+/* Buscador */
+.buscador-container {
+    margin-bottom: 25px;
+}
+
+#form-busqueda {
+    display: flex;
+}
+
+#buscarProducto {
+    flex: 1;
+    max-width: 500px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+#buscarProducto:focus {
+    border-color: #ff0000;
+}
