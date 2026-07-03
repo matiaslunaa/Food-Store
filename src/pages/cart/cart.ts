@@ -8,6 +8,7 @@ const contenedorCarrito = document.getElementById("lista-carrito");
 const totalElemento = document.getElementById("total-carrito");
 const btnVaciar = document.getElementById("vaciar-carrito");
 const formFinalizar = document.getElementById("form-finalizar") as HTMLFormElement;
+const inputNombre = document.getElementById("nombre-cliente") as HTMLInputElement; // NUEVA REFERENCIA
 
 // 3. FUNCIONES DE LÓGICA
 const cargarCarrito = () => {
@@ -60,6 +61,14 @@ const cargarCarrito = () => {
 
     if (totalElemento) {
         totalElemento.innerText = `Total: $${total}`;
+    }
+
+    // Si el usuario está logueado, completamos automáticamente el campo del nombre
+    const usuarioLogueado = localStorage.getItem("usuarioLogueado");
+    if (usuarioLogueado && inputNombre) {
+        const usuario = JSON.parse(usuarioLogueado);
+        inputNombre.value = `${usuario.nombre} ${usuario.apellido}`;
+        inputNombre.readOnly = true; 
     }
 };
 
@@ -114,12 +123,50 @@ contenedorCarrito?.addEventListener("click", (e) => {
 formFinalizar?.addEventListener("submit", (e) => {
     e.preventDefault();
     
-    const nombre = (document.getElementById("nombre-cliente") as HTMLInputElement).value;
+    const usuarioLogueado = localStorage.getItem("usuarioLogueado");
+    if (!usuarioLogueado) {
+        alert("Para confirmar tu pedido primero tenés que iniciar sesión.");
+        window.location.href = "../auth/login/login.html";
+        return;
+    }
     
-    alert(`¡Gracias por tu compra, ${nombre}! Tu pedido está en camino.`);
+    const usuario = JSON.parse(usuarioLogueado);
+    const carrito: CartItem[] = JSON.parse(localStorage.getItem("carrito") || "[]");
     
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    const inputDireccion = document.getElementById("direccion-entrega") as HTMLInputElement;
+    const nombre = inputNombre.value;
+    const direccion = inputDireccion ? inputDireccion.value : "";
+
+    // 1. Calculamos el total de este pedido
+    const totalPedido = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+
+    // 2. Armamos la estructura del nuevo pedido
+    const nuevoPedido = {
+        id: Date.now(), 
+        idUsuario: usuario.id,
+        cliente: nombre,
+        direccion: direccion,
+        fecha: new Date().toLocaleDateString("es-AR"),
+        items: carrito,
+        total: totalPedido,
+        estado: "PENDIENTE"
+    };
+
+    // 3. Lo guardamos en el LocalStorage
+    const pedidosExistentes = JSON.parse(localStorage.getItem("pedidos_realizados") || "[]");
+    pedidosExistentes.push(nuevoPedido);
+    localStorage.setItem("pedidos_realizados", JSON.stringify(pedidosExistentes));
+    
+    alert(`¡Gracias por tu compra, ${nombre}! Tu pedido fue registrado.`);
+    
+    // 4. Limpiamos carrito y redireccionamos
     localStorage.removeItem("carrito");
-    window.location.href = "/index.html";
+    window.location.href = "../home/home.html";
 });
 
 btnVaciar?.addEventListener("click", () => {

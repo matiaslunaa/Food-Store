@@ -1,9 +1,14 @@
+import type { Categoria } from "./categoria";
+
 export interface Product {
     id: number;
     nombre: string;
     precio: number;
+    descripcion: string;
+    stock: number;
     imagen: string;
-    categoria: string;
+    disponible: boolean;
+    categoria: Categoria;
 }
 
 export interface CartItem extends Product {

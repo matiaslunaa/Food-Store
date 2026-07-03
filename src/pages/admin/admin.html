@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin | Food Store</title>
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/admin.css">
+</head>
+<body style="background-color: #f3f4f6; min-height: 100vh;">
+
+    <header>
+        <h1>Food Store - Admin</h1>
+        <nav><ul>
+            <li>
+                <a href="../home/home.html">Inicio</a>
+                <a href="" id="btn-cerrar-sesion">Cerrar Sesión</a>
+            </li>
+        </ul></nav>
+    </header>
+
+    <main class="admin-container">
+        <section class="stats-grid" style="width: 10%; max-width: 900px; margin: 50px auto 10px auto; padding: 10px;">
+            <div class="stat-card productos"><h3>🍔 Productos</h3><p id="dash-prod-count">0</p></div>
+            <div class="stat-card pedidos"><h3>📦 Pedidos</h3><p id="dash-ped-count">0</p></div>
+        </section>
+
+        <section class="orders-main" style="max-width: 900px; margin: 0 auto 30px auto; padding: 0 20px;">
+            <div class="flex-header">
+                <h2 class="content-title" style="margin: 0;">Gestión de Pedidos</h2>
+            </div>
+            <div class="section-box">
+                <table class="admin-table">
+                    <thead><tr><th>ID Pedido</th><th>Fecha</th><th>Total</th><th>Estado</th><th>Acción</th></tr></thead>
+                    <tbody id="tabla-pedidos"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="orders-main" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+            <div class="flex-header">
+                <h2 class="content-title" style="margin: 0;">Catálogo de Productos</h2>
+                <button class="btn-admin btn-primary" id="btn-abrir-alta">+ Nuevo Producto</button>
+            </div>
+            <div class="section-box" style="margin-top: 15px;">
+                <table class="admin-table">
+                    <thead><tr><th>ID</th><th>Imagen</th><th>Nombre</th><th>Precio</th><th>Stock</th></tr></thead>
+                    <tbody id="tabla-productos"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-container"></div>
+
+    <script type="module" src="./admin.ts"></script>
+</body>
+</html>

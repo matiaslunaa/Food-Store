@@ -1,14 +1,50 @@
 // 1. IMPORTS
-import { productos, categorias } from "../../data/data";
+import type { Product } from "../../types/product";
+import type { Categoria } from "../../types/categoria";
 import type { CartItem } from "../../types/product";
 import "../../styles/home.css";
 import "../../styles/style.css";
+
+// Estado de la aplicación
+let productos: Product[] = [];
+let categorias: Categoria[] = [];
 
 // 2. REFERENCIAS AL DOM
 const contenedorProductos = document.getElementById("contenedor-productos");
 const listaCategorias = document.getElementById("lista-categorias");
 const buscarProducto = document.getElementById("buscarProducto") as HTMLInputElement;
 const formBusqueda = document.getElementById("form-busqueda") as HTMLFormElement;
+
+const inicializarDatos = async () => {
+    try {
+        const resCat = await fetch("/data/categorias.json");
+        categorias = await resCat.json();
+
+        const productosStorage = localStorage.getItem("productos_catalogo");
+        
+        if (productosStorage) {
+            
+            const todosLosProductos: Product[] = JSON.parse(productosStorage);
+            // Filtramos para mostrar solo los que NO fueron eliminados
+            productos = todosLosProductos.filter(p => p.disponible !== false);
+        } else {
+            // Si no hay cambios guardados en LocalStorage, leemos el JSON original
+            const resProd = await fetch("/data/productos.json");
+            const todosLosProductos: Product[] = await resProd.json();
+            
+            // Lo guardamos en LocalStorage para sincronizar la clave por primera vez
+            localStorage.setItem("productos_catalogo", JSON.stringify(todosLosProductos));
+            
+            productos = todosLosProductos.filter(p => p.disponible !== false);
+        }
+
+        cargarCategorias();
+        cargarProductos();
+        actualizarBadge();
+    } catch (error) {
+        console.error("Error al cargar la base de datos simulada:", error);
+    }
+};
 
 // 3. FUNCIONES DE LÓGICA
 const cargarCategorias = () => {
@@ -20,7 +56,8 @@ const cargarCategorias = () => {
 
     categorias.forEach(cat => {
         const li = document.createElement("li");
-        li.innerHTML = `<a href="#" data-categoria="${cat}">${cat}</a>`;
+        // Guardamos el id numérico
+        li.innerHTML = `<a href="#" data-categoria="${cat.id}">${cat.nombre}</a>`;
         listaCategorias.appendChild(li);
     });
 
@@ -33,7 +70,8 @@ const cargarCategorias = () => {
             if (categoriaSeleccionada === "todos") {
                 cargarProductos(productos);
             } else {
-                const filtrados = productos.filter(p => p.categoria === categoriaSeleccionada);
+                
+                const filtrados = productos.filter(p => p.categoria.id === Number(categoriaSeleccionada));
                 cargarProductos(filtrados);
             }
         }
@@ -97,10 +135,54 @@ const actualizarBadge = () => {
         const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
         badge.innerText = totalItems.toString();
     }
+
+    // CONTROL DE SESIÓN 
+    const usuarioLogueado = localStorage.getItem("usuarioLogueado");
+    const navLista = document.querySelector("header nav ul");
+
+    if (usuarioLogueado && navLista) {
+        const usuario = JSON.parse(usuarioLogueado);
+
+        const linkLoginExistente = navLista.querySelector('a[href*="login.html"]')?.parentElement;
+        if (linkLoginExistente) {
+            linkLoginExistente.remove();
+        }
+
+        if (!document.getElementById("user-menu-item")) {
+            const liUsuario = document.createElement("li");
+            liUsuario.id = "user-menu-item";
+            
+            // Evaluamos si el rol es ADMIN para agregarle el botón directo a su panel
+            const esAdmin = usuario.rol === "ADMIN";
+            
+            const botonAdminHtml = esAdmin 
+                ? `<li><a href="../admin/admin.html" class="text-amber-400 font-bold mr-3 hover:text-amber-500 transition-colors">Panel Admin</a></li>` 
+                : '';
+
+            // Si es admin, metemos el botón de admin primero en la barra
+            if (esAdmin) {
+                navLista.insertAdjacentHTML('beforeend', botonAdminHtml);
+            }
+
+            liUsuario.innerHTML = `
+                <span class="font-bold mr-3 text-gray-800">${usuario.nombre}</span>
+                <a href="#" id="logout-home" class="text-red-500 font-semibold no-underline hover:underline transition-all">Cerrar Sesión</a>
+            `;
+            liUsuario.classList.add("flex", "items-center");
+            navLista.appendChild(liUsuario);
+
+            // Evento del botón de Cerrar Sesión
+            document.getElementById("logout-home")?.addEventListener("click", (e) => {
+                e.preventDefault();
+                localStorage.removeItem("usuarioLogueado");
+                alert("Sesión cerrada.");
+                window.location.reload();
+            });
+        }
+    }
 };
 
-// 4. EVENTOS
-// Buscador
+// 4. EVENTOS (Tus escuchadores originales intactos)
 buscarProducto?.addEventListener("input", () => {
     const texto = buscarProducto.value.toLowerCase();
     const productosFiltrados = productos.filter(p => 
@@ -109,7 +191,6 @@ buscarProducto?.addEventListener("input", () => {
     cargarProductos(productosFiltrados);
 });
 
-// Click en "Agregar"
 contenedorProductos?.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
     if (target.classList.contains("btn-agregar")) {
@@ -122,7 +203,5 @@ formBusqueda?.addEventListener("submit", (e) => {
     e.preventDefault();
 });
 
-// 5. INICIALIZACIÓN
-cargarCategorias();
-cargarProductos();
-actualizarBadge();
+// 5. INICIALIZACIÓN ASÍNCRONA
+inicializarDatos();

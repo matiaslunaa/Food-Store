@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "nombre": "Hamburguesa Simple",
+    "precio": 10000,
+    "descripcion": "Medallón de carne, queso cheddar y aderezos.",
+    "stock": 15,
+    "imagen": "/img/hamburguesaSimple.png",
+    "disponible": true,
+    "categoria": { "id": 1, "nombre": "Hamburguesas", "descripcion": "Las mejores hamburguesas caseras" }
+  },
+  {
+    "id": 2,
+    "nombre": "Hamburrguesa Doble",
+    "precio": 12000,
+    "descripcion": "Doble medallón de carne y doble queso cheddar.",
+    "stock": 12,
+    "imagen": "/img/hamburguesaDoble.png",
+    "disponible": true,
+    "categoria": { "id": 1, "nombre": "Hamburguesas", "descripcion": "Las mejores hamburguesas caseras" }
+  },
+  {
+    "id": 3,
+    "nombre": "Hamburguesa Triple",
+    "precio": 14000,
+    "descripcion": "Triple medallón de carne con extra cheddar.",
+    "stock": 10,
+    "imagen": "/img/hamburguesaTriple.png",
+    "disponible": true,
+    "categoria": { "id": 1, "nombre": "Hamburguesas", "descripcion": "Las mejores hamburguesas caseras" }
+  },
+  {
+    "id": 4,
+    "nombre": "Hamburguesa LyT",
+    "precio": 13000,
+    "descripcion": "Medallón de carne, lechuga, tomate y aderezos.",
+    "stock": 14,
+    "imagen": "/img/hamburguesaTomate.png",
+    "disponible": true,
+    "categoria": { "id": 1, "nombre": "Hamburguesas", "descripcion": "Las mejores hamburguesas caseras" }
+  },
+  {
+    "id": 5,
+    "nombre": "Hamburguesa Con Huevo",
+    "precio": 13000,
+    "descripcion": "Medallón de carne, huevo frito y queso cheddar.",
+    "stock": 8,
+    "imagen": "/img/hamburguesaHuevo.png",
+    "disponible": true,
+    "categoria": { "id": 1, "nombre": "Hamburguesas", "descripcion": "Las mejores hamburguesas caseras" }
+  },
+  {
+    "id": 6,
+    "nombre": "Pizza Muzzarella",
+    "precio": 10000,
+    "descripcion": "Salsa de tomate casera, muzzarella y aceitunas.",
+    "stock": 8,
+    "imagen": "/img/pizzaMuzza.png",
+    "disponible": true,
+    "categoria": { "id": 2, "nombre": "Pizzas", "descripcion": "Pizzas a la piedra al horno de barro" }
+  },
+  {
+    "id": 7,
+    "nombre": "Pizza Napolitana",
+    "precio": 13000,
+    "descripcion": "Muzzarella, rodajas de tomate fresco, ajo y albahaca.",
+    "stock": 6,
+    "imagen": "/img/pizzaNapo.png",
+    "disponible": true,
+    "categoria": { "id": 2, "nombre": "Pizzas", "descripcion": "Pizzas a la piedra al horno de barro" }
+  },
+  {
+    "id": 8,
+    "nombre": "Pizza Peperoni",
+    "precio": 15000,
+    "descripcion": "Muzzarella y una generosa porción de pepperoni crujiente.",
+    "stock": 5,
+    "imagen": "/img/pizzaPep.png",
+    "disponible": true,
+    "categoria": { "id": 2, "nombre": "Pizzas", "descripcion": "Pizzas a la piedra al horno de barro" }
+  },
+  {
+    "id": 9,
+    "nombre": "Pizza Jamon y Morron",
+    "precio": 12000,
+    "descripcion": "Salsa de tomate, muzzarella, jamón cocido y morrones.",
+    "stock": 7,
+    "imagen": "/img/pizzaJyM.png",
+    "disponible": true,
+    "categoria": { "id": 2, "nombre": "Pizzas", "descripcion": "Pizzas a la piedra al horno de barro" }
+  },
+  {
+    "id": 10,
+    "nombre": "Pizza Rucula",
+    "precio": 11000,
+    "descripcion": "Muzzarella, rúcula fresca, jamón crudo y parmesano.",
+    "stock": 9,
+    "imagen": "/img/pizzaRucula.png",
+    "disponible": true,
+    "categoria": { "id": 2, "nombre": "Pizzas", "descripcion": "Pizzas a la piedra al horno de barro" }
+  },
+  {
+    "id": 11,
+    "nombre": "Papas Fritas con Cheddar",
+    "precio": 10000,
+    "descripcion": "Papas rústicas bañadas en salsa de queso cheddar fundido.",
+    "stock": 20,
+    "imagen": "/img/papasCheddar.png",
+    "disponible": true,
+    "categoria": { "id": 3, "nombre": "Papas Fritas", "descripcion": "Acompañamientos crujientes" }
+  },
+  {
+    "id": 12,
+    "nombre": "Papas Fritas con Bacon",
+    "precio": 11000,
+    "descripcion": "Papas fritas con cheddar y panceta crocante picada.",
+    "stock": 18,
+    "imagen": "/img/papasBecon.png",
+    "disponible": true,
+    "categoria": { "id": 3, "nombre": "Papas Fritas", "descripcion": "Acompañamientos crujientes" }
+  },
+  {
+    "id": 13,
+    "nombre": "Coca Cola",
+    "precio": 2500,
+    "descripcion": "Lata de gaseosa de 354ml.",
+    "stock": 50,
+    "imagen": "/img/cocacola.png",
+    "disponible": true,
+    "categoria": { "id": 4, "nombre": "Bebidas", "descripcion": "Gaseosas y bebidas bien frías" }
+  },
+  {
+    "id": 14,
+    "nombre": "Sprite",
+    "precio": 2500,
+    "descripcion": "Lata de gaseosa de 354ml sabor lima-limón.",
+    "stock": 40,
+    "imagen": "/img/sprite.png",
+    "disponible": true,
+    "categoria": { "id": 4, "nombre": "Bebidas", "descripcion": "Gaseosas y bebidas bien frías" }
+  },
+  {
+    "id": 15,
+    "nombre": "Agua Mineral",
+    "precio": 1500,
+    "descripcion": "Botella de agua mineral de 500ml sin gas.",
+    "stock": 30,
+    "imagen": "/img/agua.png",
+    "disponible": true,
+    "categoria": { "id": 4, "nombre": "Bebidas", "descripcion": "Gaseosas y bebidas bien frías" }
+  }
+]
